@@ -1,0 +1,26 @@
+<project basedir="." default="build" name="TheMovieDBAPI">
+    <path id="project.classpath">
+        <fileset dir="lib" includes="*.jar"/>
+        <pathelement location="bin" />
+    </path>
+
+    <target name="init">
+        <mkdir dir="bin" />
+    </target>
+
+    <target name="clean">
+        <delete dir="bin" />
+    </target>
+
+    <target depends="init" name="build">
+        <property name="version.num" value="1.00"/>
+        <buildnumber file="build.num"/>
+        
+        <echo message="${ant.project.name}:${ant.file}" />
+        <javac destdir="bin" includeantruntime="false">
+                <src path="src/" />
+                <classpath refid="project.classpath" />
+        </javac>
+        <jar destfile="tmdb4j-${version.num}.jar" basedir="bin" />
+    </target>
+</project>
