@@ -14,19 +14,17 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        TMDb tmdb = new TMDb("e4286ac8d5eb58b06576ac15d1c0e644");
-                       
+        TMDb tmdb = new TMDb("<API KEY>");
    
-            MovieBean movie = pickMovie(tmdb);
-            MovieCastsBean cast = tmdb.getMovieCasts(movie.getId());
-                
-            while (!isEnglishSpokenLanguage(movie)) {
-                movie = pickMovie(tmdb);
-                cast = tmdb.getMovieCasts(movie.getId());
-                
-                System.out.println(cast);
-            }
-
+        MovieBean movie = pickMovie(tmdb);
+        MovieCastsBean cast = tmdb.getMovieCasts(movie.getId());
+            
+        while (!isEnglishSpokenLanguage(movie)) {
+            movie = pickMovie(tmdb);
+            cast = tmdb.getMovieCasts(movie.getId());                
+        }
+        
+        System.out.println(cast);
         
     }
     
