@@ -262,26 +262,29 @@ public class TMDbApiURL {
             
             for (int i = 0; i < apiParameters.length; i++) {
                 /*
-                 * Ignore null and invalid parameters
+                 * Ignore null parameters
                  */
-                if (apiParameters[i] != null && apiParameters[i].isValid()) {
+                if (apiParameters[i] != null) {
                     /*
-                     * First parameter has '?' as delimiter, others have '&.'
+                     * Ignore invalid parameters  
                      */
-                    if (isFirst) {
-                        url.append(FIRST_PARAMETER_DELIMITER);
-                        url.append(apiParameters[i].toString());
-                        
-                        isFirst = false;
+                    if (apiParameters[i].isValid()) {
+                        /*
+                         * First parameter has '?' as delimiter, others have '&.'
+                         */
+                        if (isFirst) {
+                            url.append(FIRST_PARAMETER_DELIMITER);
+                            url.append(apiParameters[i].toString());
+                            
+                            isFirst = false;
+                        } else {
+                            url.append(PARAMETER_DELIMITER);
+                            url.append(apiParameters[i].toString());
+                        }
                     } else {
-                        url.append(PARAMETER_DELIMITER);
-                        url.append(apiParameters[i].toString());
-                    }
-                } else {
-                    if (apiParameters[i] != null) {
                         log.trace("Invalid parameter " + apiParameters[i].toString());
-                    }
-                }   
+                    } 
+                }
             }
         }
         
