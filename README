@@ -6,7 +6,7 @@ TMDb API support for Java (tmdb4j)
 Author: Luka Obradovic
 mailto: nomorestories@gmail.com
 
-Support for TheMovieDB.org API v3, as specified at http://api.themoviedb.org/
+Support for TheMovieDB.org API v3, as specified at http://help.themoviedb.org/kb/api/about-3
 
 Please check out and support this great movies open database:
 http://www.themoviedb.org
