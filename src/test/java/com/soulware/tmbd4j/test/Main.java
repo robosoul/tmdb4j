@@ -1,4 +1,4 @@
-package com.tmbd4j.test;
+package com.soulware.tmbd4j.test;
 
 import java.io.IOException;
 import java.text.ParseException;
