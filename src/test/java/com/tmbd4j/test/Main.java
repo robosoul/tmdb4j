@@ -6,15 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.tmdb4j.beans.model.GenreBean;
-import com.tmdb4j.beans.model.LanguageBean;
-import com.tmdb4j.beans.model.MovieBean;
-import com.tmdb4j.beans.model.MovieCastBean;
-import com.tmdb4j.beans.model.MovieCrewBean;
-import com.tmdb4j.beans.model.ProductionCompanyBean;
-import com.tmdb4j.beans.model.lists.MovieCastsBean;
-import com.tmdb4j.beans.model.lists.MoviesListBean;
-import com.tmdb4j.core.TMDb;
+import com.soulware.tmdb4j.beans.model.GenreBean;
+import com.soulware.tmdb4j.beans.model.LanguageBean;
+import com.soulware.tmdb4j.beans.model.MovieBean;
+import com.soulware.tmdb4j.beans.model.MovieCastBean;
+import com.soulware.tmdb4j.beans.model.MovieCrewBean;
+import com.soulware.tmdb4j.beans.model.ProductionCompanyBean;
+import com.soulware.tmdb4j.beans.model.lists.MovieCastsBean;
+import com.soulware.tmdb4j.beans.model.lists.MoviesListBean;
+import com.soulware.tmdb4j.core.TMDb;
 
 public class Main {
 
@@ -23,11 +23,11 @@ public class Main {
      */
     public static void main(String[] args) {
         TMDb tmdb = new TMDb("e4286ac8d5eb58b06576ac15d1c0e644");
-      
+
         int i = 0;
-        while (++i < 2) {
+        while (++i < 5) {
             try {
-                MovieBean movie = searchMovie(tmdb, "iron+giant");
+                MovieBean movie = pickMovie(tmdb);
                 MovieCastsBean cast = tmdb.getMovieCasts(movie.getId());
                 
                 Date releseDate = null;
