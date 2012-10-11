@@ -29,26 +29,43 @@ import org.apache.log4j.Logger;
 
 public class TMDbApiService {
     public static final Logger log = Logger.getLogger(TMDbApiService.class);
+    private static final String HTTP_REQUEST_METHOD_GET = "GET";
+    
+    private static final String REQUEST_HEADER_FIELD_ACCEPT   = "Accept";
+    private static final String CONTENT_TYPE_APPLICATION_JSON = "application/json";
         
     private TMDbApiService() {
         
     }
     
-    public static InputStream get(URL url) {
-        try {
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            
-            final int statusCode = connection.getResponseCode();
-            if (statusCode == 200) {
-                return connection.getInputStream();
-            } else {
-                log.warn("Error status code " + statusCode + "for URL " + url);
-                return null;
-            }
-        } catch (IOException ex) {
-            log.warn("Error for URL " + url, ex);
+    /**
+     * Returns input stream from of url or null if HTTP status code not equals 200.
+     * 
+     * Sends the valid accept header as specified:
+     * http://help.themoviedb.org/kb/api/authentication-basics
+     * 
+     * @param url 
+     * @return Returns input stream from of url or null if HTTP status code not equals 200
+     * @throws IOException
+     */
+    public static InputStream get(URL url) throws IOException {
+        HttpURLConnection connection  = null;          
+        InputStream response = null;
+        
+        connection = (HttpURLConnection) url.openConnection();
+        
+        connection.setRequestMethod(HTTP_REQUEST_METHOD_GET);
+        connection.addRequestProperty(
+            REQUEST_HEADER_FIELD_ACCEPT, 
+            CONTENT_TYPE_APPLICATION_JSON);
+        
+        final int statusCode = connection.getResponseCode();
+        if (statusCode == HttpURLConnection.HTTP_OK) {
+            response = connection.getInputStream();
+        } else {
+            log.warn("Error status code " + statusCode + "for URL " + url);
         }
         
-        return null;
-    }
+        return response;
+    }    
 }

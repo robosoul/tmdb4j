@@ -27,8 +27,6 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.soulware.tmdb4j.beans.model.CompanyBean;
@@ -1942,20 +1940,26 @@ public class TMDb {
             return null;
         }
         
-        final ObjectMapper mapper = new ObjectMapper();
+        final ObjectMapper mapper = new ObjectMapper();        
         
+        InputStream json = null; 
+        T result = null;
         try {
-            InputStream json = TMDbApiService.get(url);
+            json = TMDbApiService.get(url);
             
-            if (json != null) {             
-                return mapper.readValue(json, valueType);
+            if (json != null) {
+                result = mapper.readValue(json, valueType);
             }
-        } catch (JsonParseException e) {
-            log.warn("Unable to parse JSON - " + e.toString());
-        } catch (JsonMappingException e) {
-            log.warn("Invalid JSON mappings - " + e.toString());
+        } finally {
+            if (json != null) {
+                try {
+                    json.close();
+                } catch (IOException e) {
+                    log.debug("Failed to close json stream", e);
+                }
+            }
         }
         
-        return null;
+        return result;
     }
 }
