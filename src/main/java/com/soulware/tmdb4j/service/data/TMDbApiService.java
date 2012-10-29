@@ -63,7 +63,7 @@ public class TMDbApiService {
         if (statusCode == HttpURLConnection.HTTP_OK) {
             response = connection.getInputStream();
         } else {
-            log.warn("Error status code " + statusCode + "for URL " + url);
+            log.warn("Error status code " + statusCode + " for URL " + url);
         }
         
         return response;
