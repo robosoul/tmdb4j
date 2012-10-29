@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="TMDbTestSuite" verbose="1" >
+  <test name="TMDbTest">
+    <classes>
+      <class name="TMDBTest"/>
+    </classes>
+  </test>
+</suite>
